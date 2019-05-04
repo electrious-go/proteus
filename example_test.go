@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"gopkg.in/src-d/proteus.v1/example/client"
-	"gopkg.in/src-d/proteus.v1/example/server"
+	"github.com/electrious-go/proteus/example/client"
+	"github.com/electrious-go/proteus/example/server"
 )
 
 func ExampleProteus() {

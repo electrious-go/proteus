@@ -1,6 +1,6 @@
 package foo
 
-import "gopkg.in/src-d/proteus.v1/fixtures/subpkg"
+import "github.com/electrious-go/proteus/fixtures/subpkg"
 
 // Bar ...
 //proteus:generate

@@ -8,11 +8,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
-	"gopkg.in/src-d/proteus.v1/report"
-	"gopkg.in/src-d/proteus.v1/scanner"
+	"github.com/electrious-go/proteus/report"
+	"github.com/electrious-go/proteus/scanner"
 )
 
-const project = "gopkg.in/src-d/proteus.v1"
+const project = "github.com/electrious-go/proteus"
 
 func TestPackagesEnums(t *testing.T) {
 	packages := []*scanner.Package{

@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"gopkg.in/src-d/proteus.v1/example/categories"
+	"github.com/electrious-go/proteus/example/categories"
 )
 
-//go:generate proteus -p gopkg.in/src-d/proteus.v1/example -f $GOPATH/src/gopkg.in/src-d/proteus.v1/example/protos
+//go:generate proteus -p github.com/electrious-go/proteus/example -f $GOPATH/src/gopkg.in/src-d/proteus.v1/example/protos
 
 //proteus:generate
 type Product struct {

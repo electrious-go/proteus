@@ -5,7 +5,7 @@ import (
 	"go/types"
 	"strings"
 
-	"gopkg.in/src-d/proteus.v1/protobuf"
+	"github.com/electrious-go/proteus/protobuf"
 )
 
 type context struct {

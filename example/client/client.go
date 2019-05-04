@@ -1,8 +1,8 @@
 package client
 
 import (
-	"gopkg.in/src-d/proteus.v1/example"
-	"gopkg.in/src-d/proteus.v1/example/categories"
+	"github.com/electrious-go/proteus/example"
+	"github.com/electrious-go/proteus/example/categories"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"

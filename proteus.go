@@ -1,10 +1,10 @@
 package proteus
 
 import (
-	"gopkg.in/src-d/proteus.v1/protobuf"
-	"gopkg.in/src-d/proteus.v1/resolver"
-	"gopkg.in/src-d/proteus.v1/rpc"
-	"gopkg.in/src-d/proteus.v1/scanner"
+	"github.com/electrious-go/proteus/protobuf"
+	"github.com/electrious-go/proteus/resolver"
+	"github.com/electrious-go/proteus/rpc"
+	"github.com/electrious-go/proteus/scanner"
 )
 
 // Options are all the available options to configure proto generation.
