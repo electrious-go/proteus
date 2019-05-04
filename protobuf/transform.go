@@ -252,8 +252,11 @@ func (t *Transformer) transformField(pkg *Package, msg *Message, field *scanner.
 		Docs:     field.Doc,
 		Name:     toLowerSnakeCase(field.Name),
 		Options:  t.defaultOptionsForStructField(field),
-		Pos:      pos,
+		Pos:      int(field.Position),
 		Repeated: repeated,
+	}
+	if f.Pos == 0 {
+		f.Pos = pos
 	}
 
 	// []byte is the only repeated type that maps to

@@ -7,12 +7,13 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 	"sync"
 
 	"github.com/electrious-go/proteus/report"
 
-	"gopkg.in/src-d/go-parse-utils.v1"
+	parseutil "gopkg.in/src-d/go-parse-utils.v1"
 )
 
 var goPath = os.Getenv("GOPATH")
@@ -271,6 +272,11 @@ func scanStruct(s *Struct, elem *types.Struct) *Struct {
 			continue
 		}
 
+		pos, err := getFieldPosition(tags)
+		if err != nil {
+			panic(fmt.Sprintf("getFieldPosition error: %s, struct %s, field: %s", err, s.Name, v.Name()))
+		}
+
 		// TODO: It has not been decided yet what exact behaviour
 		// is the intended when a struct overrides a field from
 		// a previously embedded type. For now, the field is just
@@ -292,14 +298,20 @@ func scanStruct(s *Struct, elem *types.Struct) *Struct {
 		}
 
 		f := &Field{
-			Name: v.Name(),
-			Type: scanType(v.Type()),
+			Name:     v.Name(),
+			Type:     scanType(v.Type()),
+			Position: pos,
 		}
 		if f.Type == nil {
 			continue
 		}
 
 		s.Fields = append(s.Fields, f)
+	}
+
+	err := s.Validate()
+	if err != nil {
+		panic(fmt.Sprintf("validation error: %s, struct %s", err, s.Name))
 	}
 
 	return s
@@ -388,6 +400,20 @@ func (v enumValues) Less(i, j int) bool {
 
 func isIgnoredField(f *types.Var, tags []string) bool {
 	return !f.Exported() || (len(tags) > 0 && tags[0] == "-")
+}
+
+func getFieldPosition(tags []string) (uint64, error) {
+	var pos uint64
+
+	if len(tags) > 1 {
+		p, err := strconv.ParseUint(tags[1], 10, 64)
+		if err != nil {
+			return pos, err
+		}
+		pos = p
+	}
+
+	return pos, nil
 }
 
 func objectsInScope(scope *types.Scope) (objs []types.Object) {

@@ -297,11 +297,41 @@ func (s *Struct) HasField(name string) bool {
 	return false
 }
 
+// Validate checks if Stuct complies to correcntess policy.
+func (s *Struct) Validate() error {
+	allPositionsZero := true
+	for _, f := range s.Fields {
+		if f.Position != 0 {
+			allPositionsZero = false
+			break
+		}
+	}
+	allPositionsSet := true
+	for _, f := range s.Fields {
+		if f.Position == 0 {
+			allPositionsSet = false
+			break
+		}
+	}
+
+	switch {
+	case allPositionsZero:
+		// pass
+	case allPositionsSet:
+		// pass
+	default:
+		return fmt.Errorf("Struct field position tags inconsistency - set position tag to all fields (recommended) or none (dangerous)")
+	}
+
+	return nil
+}
+
 // Field contains name and type of a struct field.
 type Field struct {
 	Docs
-	Name string
-	Type Type
+	Name     string
+	Type     Type
+	Position uint64
 }
 
 // Func is either a function or a method. Receiver will be nil in functions,
