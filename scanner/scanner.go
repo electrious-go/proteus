@@ -249,8 +249,11 @@ func scanType(typ types.Type) (t Type) {
 			return nil
 		}
 		t = NewMap(key, val)
+	case *types.Interface:
+		report.Warn("ignoring unsupported interface %T -- %s", typ, typ.String())
+		return nil
 	default:
-		report.Warn("ignoring type %s", typ.String())
+		report.Warn("ignoring type %T -- %s", typ, typ.String())
 		return nil
 	}
 

@@ -28,6 +28,8 @@ func New() *Resolver {
 			"time.Duration":   {},
 			"context.Context": {},
 			"error":           {},
+			"github.com/electrious-go/arch/pkg/errdef.ErrSet": {},
+			"github.com/electrious/api/pkg/errdef.ErrSet":     {},
 		},
 	}
 }
